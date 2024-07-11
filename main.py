@@ -1,47 +1,39 @@
-class Warrior():
+# Задача: Создай класс Task, который позволяет управлять задачами (делами).
+# У задачи должны быть атрибуты: описание задачи, срок выполнения и статус (выполнено/не выполнено).
+# Реализуй функцию для добавления задач, отметки выполненных задач и вывода списка текущих (не выполненных) задач.
 
-    def __init__(self, name, power, endurance, hair_color):
-        self.name = name
-        self.power = power
-        self.endurance = endurance
-        self.hair_color = hair_color
+class Task():
+    def __init__(self, tsk, time, status=False):
+        self.tsk = tsk
+        self.time = time
+        self.status = status
 
-    def sleep(self):
-        print(f"{self.name} лег спать")
-        self.endurance += 2
+    def mark_as_done(self):
+        self.status = True
 
-    def eat(self):
-        print(f"{self.name} сел поесть")
-        self.power += 1
+    def print_tsk(self):
+        return f"Задача: {self.tsk}, срок: {self.time}, статус: {'выполнено' if self.status else 'не выполнено'}"
 
-    def hit(self):
-        print(f"{self.name} бьет когото")
-        self.endurance -= 6
+tasks = []
 
-    def walk(self):
-        print(f"{self.name} гуляет")
+def new_tsk():
+    desc = input("Введите описание задачи: ")
+    time = input("Введите срок выполнения задачи: ")
+    new_task = Task(desc, time)
+    tasks.append(new_task)
 
-    def info(self):
-        print(f"имя воина {self.name}")
-        print(f"сила воина {self.power}")
-        print(f"выносливость воина {self.endurance}")
-        print(f"цвет волос воина {self.hair_color}")
+def print_current_tasks():
+    for task in tasks:
+        if not task.status:
+            print(task.print_tsk())
 
-war1 = Warrior("Степа", 76, 54, "коричневый")
-war2 = Warrior("Егор", 45, 23, "блонд")
+# Пример использования
+new_tsk()  # Добавление новой задачи
+new_tsk()  # Добавление еще одной задачи
 
-war1.info()
-war1.sleep()
-war1.eat()
-war1.hit()
-war1.walk()
-war1.info()
+# Отметка первой задачи как выполненной
 
-war2.info()
-war2.sleep()
-war2.eat()
-war2.hit()
-war2.walk()
-war2.info()
+tasks[0].mark_as_done()
 
-sleep()
+# Вывод списка текущих (не выполненных) задач
+print_current_tasks()
